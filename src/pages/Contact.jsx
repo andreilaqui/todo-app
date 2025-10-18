@@ -55,7 +55,7 @@ export default function Contact() {
   // 📤 Handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    const mailto = `mailto:your@email.com?subject=Message from ${encodeURIComponent(
+    const mailto = `mailto:a.laqui837@mybvc.ca?subject=Message from ${encodeURIComponent(
       email
     )}&body=${encodeURIComponent(e.target.message.value)}`; //had to use e.target because I don't know the message text because it's uncontrolled
     window.location.href = mailto;
