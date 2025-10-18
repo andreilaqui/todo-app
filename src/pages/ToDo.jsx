@@ -1,5 +1,6 @@
 // 🔧 Core React
 import React from 'react';
+import {useState, useEffect} from 'react';
 
 // 🧱 Components
 import TaskList from '../components/TaskList';
@@ -40,53 +41,66 @@ const buttonStyleDark = `
   active:scale-95 transition-all duration-150`;
 
 
-function ToDo() {
-    const [task, setTask] = React.useState('');
-    const [tasks, setTasks] = React.useState([]);
+export default function ToDo() {
+  //  State hooks  //
+  const [task, setTask] = useState('');   // the task in the input box
+  const [tasks, setTasks] = useState([]); // the array of tasks
+  const [hasLoaded, setHasLoaded] = useState(false);  // flag for loading on mount
 
-    const { theme } = useContext(ThemeContext);
-    const buttonStyle = (theme === 'dark') ? buttonStyleDark : buttonStyleLight;
-    const inputTextStyle = (theme === 'dark') ? inputTextStyleDark : inputTextStyleLight;
-    const todoStyle = (theme === 'dark') ? todoStyleDark : todoStyleLight;
+  //  Theme and Style  //
+  const { theme } = useContext(ThemeContext);
+  const buttonStyle = (theme === 'dark') ? buttonStyleDark : buttonStyleLight;
+  const inputTextStyle = (theme === 'dark') ? inputTextStyleDark : inputTextStyleLight;
+  const todoStyle = (theme === 'dark') ? todoStyleDark : todoStyleLight;
 
+  //  Effect hooks  //
+  useEffect(() => {
+    const storeTasks = localStorage.getItem("myTaskList");  // get saved array from localStorage
+    if (storeTasks) setTasks(JSON.parse(storeTasks))        // parse froms string into array
+    setHasLoaded(true);
+  }, []); // only do it on first mount
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if (task.trim()) {
-            const newTask = {
-                id: crypto.randomUUID(),
-                text: task.trim(),
-            }
-            setTasks([...tasks, newTask])
-            setTask('')
-        }
+  useEffect(() => {
+    if (hasLoaded) localStorage.setItem("myTaskList", JSON.stringify(tasks))  // stringify from array into string to save to localStorage
+  }, [tasks]); // do it everytime tasks array changes
+
+  // Handlers  //
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (task.trim()) {
+      const newTask = {
+        id: crypto.randomUUID(),  // makeshift id because we can't be sure tasks will be unique
+        text: task.trim(),        // actual text
+      }
+      setTasks([...tasks, newTask])   // add the new task into the tasks array
+      setTask('')                     // clear the new task (do not confuse task with tasks)
     }
+  }
 
-    const handleDeleteTask = (id) => {
-        const newTasks = tasks.filter((task) => task.id !== id)
-        setTasks(newTasks)
-    }
+  const handleDeleteTask = (id) => {
+    const newTasks = tasks.filter((task) => task.id !== id)   // make a new array WITHOUT the one being deleted
+    setTasks(newTasks)                                        // replace the array with the newly made array (task have been removed)
+  }
 
-    return (
-        <div className={todoStyle}>
-            <h2 className="text-xl font-bold mx-auto w-fit mb-4">My Tasks</h2>
-            <form onSubmit={handleSubmit} className="flex gap-2 mt-4">
-                <input
-                    type="text"
-                    className={inputTextStyle}
-                    placeholder='new task'
-                    value={task}
-                    onChange={(e) => setTask(e.target.value)}
-                />
-                <button
-                    type='submit'
-                    className={buttonStyle}
-                >Add</button>
-            </form>
-            <TaskList tasks={tasks} handleDeleteTask={handleDeleteTask} />
-        </div>
-    )
+  // JSX
+  return (
+    <div className={todoStyle}>
+      <h2 className="text-xl font-bold mx-auto w-fit mb-4">My Tasks</h2>
+      <form onSubmit={handleSubmit} className="flex gap-2 mt-4">
+        <input
+          type="text"
+          className={inputTextStyle}
+          placeholder='new task'
+          value={task} //putting value makes this controlled (two-way binding)
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <button
+          type='submit'
+          className={buttonStyle}
+        >Add</button>
+      </form>
+      <TaskList tasks={tasks} handleDeleteTask={handleDeleteTask} />
+    </div>
+  )
 }
 
-
-export default ToDo

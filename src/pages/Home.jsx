@@ -1,4 +1,6 @@
 import React from 'react'
+// 🚦 React Router
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -7,14 +9,14 @@ function Home() {
         Stay Organized. Stay Focused.
       </h1>
       <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mb-6">
-        Welcome to your personal task manager — built for clarity, speed, and a touch of polish.
+        Welcome to your personal task manager — built for clarity, speed, and simplicity.
       </p>
-      <a
-        href="/todo-app/todo"
+      <Link
+        to="/todo"
         className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition"
       >
         View My Tasks
-      </a>
+      </Link>
     </section>
   );
 

@@ -1,11 +1,6 @@
 // 🔧 Core React
 import { useContext } from 'react';
 
-
-// 🧩 Pages
-// import HomePage from './HomePage';
-// import AboutPage from './AboutPage';
-
 // 🧱 Components
 import { ThemeContext } from '../contexts/ThemeContext'
 

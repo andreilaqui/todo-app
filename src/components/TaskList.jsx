@@ -34,7 +34,7 @@ function TaskList({tasks, handleDeleteTask}) {
             {tasks.map((task) => (
                 <li key={task.id} className={liStyle}>
                     {task.text}
-                    <button onClick={() => handleDeleteTask(task.id)} className="cursor-pointer">🗑️</button>
+                    <button onClick={() => handleDeleteTask(task.id)} className="cursor-pointer">🗑️</button>  {/*handleDeleteTask is in ToDo and passed via props*/}
                 </li>
             ))}
         </ul>

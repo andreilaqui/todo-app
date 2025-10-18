@@ -1,8 +1,3 @@
-
-// 🧩 Pages
-// import HomePage from './HomePage';
-// import AboutPage from './AboutPage';
-
 // 🧱 Components
 import ThemeToggle from './ThemeToggle';
 

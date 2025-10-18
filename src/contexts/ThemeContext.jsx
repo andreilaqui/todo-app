@@ -12,7 +12,7 @@ export function ThemeProvider({ children }) {
         setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
     }
 
-    //  provide context value to children
+    // provide context value to children
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
