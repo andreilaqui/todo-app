@@ -32,13 +32,13 @@ const buttonStyleLight = `
   bg-[#e0e0e0] text-gray-800 
   shadow-[4px_4px_8px_#bebebe,-4px_-4px_8px_#ffffff] 
   hover:bg-blue-500 hover:text-white hover:shadow-none 
-  active:scale-95 transition-all duration-150`;
+  active:scale-95 transition-all duration-150 cursor-pointer`;
 const buttonStyleDark = `
   px-4 py-2 rounded-lg
   bg-gray-600 text-white
   shadow-[4px_4px_8px_#1a1a1a,-4px_-4px_8px_#ffffff22]
   hover:bg-blue-600 hover:text-white hover:shadow-none
-  active:scale-95 transition-all duration-150`;
+  active:scale-95 transition-all duration-150 cursor-pointer`;
 
 
 export default function ToDo() {
