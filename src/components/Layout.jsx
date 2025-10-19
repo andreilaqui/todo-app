@@ -21,12 +21,12 @@ export default function Layout() {
             <Header />
             <nav className={
                 theme === 'dark'
-                    ? "bg-gray-800 p-2"
-                    : "bg-gray-100 p-2"
+                    ? "bg-gray-800 p-2 space-x-9 justify-center flex"
+                    : "bg-gray-100 p-2 space-x-9 justify-center flex"
                 }
             >
-                <Link to="/">Home</Link> | {" "}
-                <Link to="/todo">To Do</Link> | {" "}
+                <Link to="/">Home</Link>
+                <Link to="/todo">To Do</Link>
                 <Link to="/contact">Contact</Link>
             </nav>
             <Outlet />
